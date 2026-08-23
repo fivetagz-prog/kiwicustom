@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Y2Mate - YouTube Downloader - Download Videos Online</title>
+    <meta name="description" content="Download supported YouTube videos and audio online with Y2Mate. Paste a link, choose an available format and quality, and save the file without registration.">
+    <meta name="csrf-token" content="local-demo-token">
+
+    <!-- Local CSS -->
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Small clean-up overrides for the self-contained version */
+        .navbar-brand .brand-text {
+            color: #ff0068;
+            font-weight: 700;
+            font-size: 22px;
+        }
+        #btnSubmit {
+            background-color: #ff0068;
+            border: 2px solid #ff0068;
+            color: #fff;
+            padding: 8px 18px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #btnSubmit:hover {
+            background-color: #c10841;
+            border-color: #c10841;
+        }
+        .yt-input input.deletable {
+            width: 60%;
+            max-width: 480px;
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 15px;
+        }
+        @media (max-width: 768px) {
+            .yt-input input.deletable {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            #btnSubmit {
+                width: 100%;
+            }
+        }
+        .demo-notice {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            color: #856404;
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin: 20px auto;
+            max-width: 700px;
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="crm_body_bg">
+
+    <!-- Navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a title="Go to Home" href="index.html" class="navbar-brand">
+                    <span class="brand-text">Y2Mate</span>
+                </a>
+            </div>
+
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active-nav">
+                        <a href="index.html">
+                            <span class="glyphicon glyphicon-home"></span> Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#features">
+                            <span class="glyphicon glyphicon-music"></span> YouTube to MP3
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#features">
+                            <span class="glyphicon glyphicon-film"></span> YouTube to MP4
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Converter Section -->
+    <section class="custom_container mt-20">
+        <div id="video_container" class="text-center video_container_section">
+            <div class="row" id="h1-head">
+                <div class="col-md-12">
+                    <h1 class="intro-h1">YouTube Video Downloader</h1>
+                </div>
+            </div>
+
+            <div class="demo-notice">
+                <strong>Self-contained demo</strong> — Front-end only. Actual conversion requires the original backend, Cloudflare Turnstile, and API endpoints. The UI, styles, and convert.js logic are fully included.
+            </div>
+
+            <div class="mt-10">
+                <div class="yt-input">
+                    <div id="divInput" class="text-center">
+                        <div>
+                            <input class="deletable" id="txtUrl" name="url" type="text"
+                                   placeholder="Paste Youtube link" autocomplete="off">
+                            <button type="button" value="Start" id="btnSubmit">
+                                <span class="start-btn">Start</span>
+                                <span class="glyphicon glyphicon-arrow-right"></span>
+                            </button>
+                        </div>
+
+                        <p id="tos" class="text-center pt-10">
+                            By using our service you are accepting our
+                            <a style="text-decoration: underline;" href="#">terms of service</a>.
+                        </p>
+
+                        <div id="captchaContainer" style="margin-top: 20px; display: none;"></div>
+
+                        <div id="imgAnalyzer" style="display: none;">
+                            <p style="color:#777;">Loading video information...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="videoCard"></div>
+
+                <div id="error" style="display: none;" class="caption text-left">
+                    <div id="error-text" role="alert" class="alert text-center">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span id="errorMessage"></span>
+                    </div>
+                </div>
+
+                <div id="DownloadTip">
+                    <hr>
+                    <p style="margin: 0;">
+                        <strong>Tip:</strong>
+                        Add <strong>pi</strong> after <strong>youtube</strong> in the URL bar to download MP4 and MP3 files faster.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="custom_container" id="features" style="margin-top: 40px; margin-bottom: 60px;">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h2 class="intro-h2">Download YouTube Videos in Your Preferred Format</h2>
+                <p class="intro-text" style="max-width: 800px; margin: 0 auto 30px;">
+                    Y2Mate is a free online YouTube video downloader for saving supported videos and audio
+                    directly to your device. Paste a YouTube link into the search box, choose an available
+                    format and quality, and prepare the file in a few simple steps.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h3>How to Download YouTube Videos Online?</h3>
+                <div class="features">
+                    <ul class="itemstyle">
+                        <li>Copy the URL of the YouTube video you want to save to your device.</li>
+                        <li>Paste the URL into the search box and wait for the formats to load.</li>
+                        <li>Select an available format, then choose your preferred quality option.</li>
+                        <li>Click "Convert", then select "Download" when the file is ready to save.</li>
+                        <li>Save the finished file to your device and open it whenever you want.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h3>What Makes Our Online YouTube Downloader Different?</h3>
+                <div class="features">
+                    <ul class="itemstyle">
+                        <li>Convert supported YouTube videos without creating an account or signing up.</li>
+                        <li>Fast processing detects video and audio options with little delay.</li>
+                        <li>Download converted video or audio files directly to your preferred device.</li>
+                        <li>Use the downloader without signup, registration, or extra software.</li>
+                        <li>Choose from available video and audio formats, including MP4 and MP3 files.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row pt-5">
+            <div class="col-md-4 text-center">
+                <span class="glyphicon40 glyphicon glyphicon-refresh"></span>
+                <h4><b>Unlimited Conversions</b></h4>
+                <p>Convert supported YouTube videos and choose available video or audio formats whenever you need, with no daily limits.</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <span class="glyphicon40 glyphicon glyphicon-download-alt"></span>
+                <h4><b>Automatic Video Detection</b></h4>
+                <p>Paste a YouTube URL into the search box to automatically load available video information, formats, and quality options.</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <span class="glyphicon40 glyphicon glyphicon-user"></span>
+                <h4><b>No Registration Required</b></h4>
+                <p>No registration or signup is required. Paste a YouTube link, choose a file format, and start converting videos online.</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 text-center second-line">
+                <span class="glyphicon40 glyphicon glyphicon-flash"></span>
+                <h4><b>Faster Video Conversion</b></h4>
+                <p>Fast processing helps convert YouTube videos into available formats quickly, without extra software or complicated steps.</p>
+            </div>
+            <div class="col-md-4 text-center second-line">
+                <span class="glyphicon40 glyphicon glyphicon-globe"></span>
+                <h4><b>Browser Compatibility</b></h4>
+                <p>Works smoothly in modern browsers like Chrome, Firefox, Safari, and Microsoft Edge on phones, tablets, laptops, and desktops.</p>
+            </div>
+            <div class="col-md-4 text-center second-line">
+                <span class="glyphicon40 glyphicon glyphicon-phone"></span>
+                <h4><b>Mobile-Friendly</b></h4>
+                <p>The downloader works on phones, tablets, laptops, and desktops, with a layout that adjusts to different screen sizes.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background:#f1f3f5; padding: 40px 0 20px; margin-top: 40px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>Y2Mate</h4>
+                    <p>Your favorite video converter.</p>
+                </div>
+                <div class="col-md-4">
+                    <h4>Links</h4>
+                    <ul style="list-style:none; padding:0;">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h4>More Tools</h4>
+                    <ul style="list-style:none; padding:0;">
+                        <li><a href="#">Shorts Downloader</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr style="margin-top: 20px;">
+            <div class="text-center">
+                <p class="copyright">© 2026 Y2Mate — Clean self-contained front-end demo.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Local JS -->
+    <script src="jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <script src="convert.js"></script>
+
+    <!-- Optional: simple paste button helper (original site has one) -->
+    <script>
+        // Small enhancement: allow Enter key to trigger the Start button
+        document.addEventListener('DOMContentLoaded', function () {
+            var input = document.getElementById('txtUrl');
+            var btn = document.getElementById('btnSubmit');
+            if (input && btn) {
+                input.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        btn.click();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
