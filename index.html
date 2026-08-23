@@ -110,7 +110,7 @@
             </div>
 
             <div class="demo-notice">
-                <strong>Self-contained demo</strong> — Front-end only. Actual conversion requires the original backend, Cloudflare Turnstile, and API endpoints. The UI, styles, and convert.js logic are fully included.
+                <strong>Self-contained demo</strong> — Front-end only (includes local Cloudflare Turnstile API script). Actual conversion still requires the original backend (<code>/getdata</code>) and a valid Turnstile sitekey. The UI, styles, convert.js, and Turnstile client are fully included.
             </div>
 
             <div class="mt-10">
@@ -269,6 +269,7 @@
     <!-- Local JS -->
     <script src="jquery.min.js"></script>
     <script src="bootstrap.min.js"></script>
+    <script src="turnstile-api.js"></script>
     <script src="convert.js"></script>
 
     <!-- Optional: simple paste button helper (original site has one) -->
