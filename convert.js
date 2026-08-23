@@ -595,7 +595,7 @@ document.addEventListener(
                 $statusWrapper.html(
                     '<button id="dl-status-btn" class="yb-btn yb-btn-primary" disabled>' +
                         '<span class="spinner" aria-hidden="true"></span>' +
-                        '<span class="btn-text">Preparing your file…</span>' +
+                        '<span class="btn-text">Preparing your fileâ€¦</span>' +
                     "</button>"
                 );
 
